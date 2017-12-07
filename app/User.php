@@ -2,8 +2,11 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use App\Phone;
+use App\Role;
+use App\Vehicle;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -26,4 +29,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function phone()
+    {
+        return $this->hasOne(Phone::class);
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }
